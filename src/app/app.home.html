@@ -1,0 +1,31 @@
+<div class="'container-fluid'">
+    <div [ngClass]="'main_content'">
+        <div [ngClass]="'gerre'">
+            <select [(ngModel)]="selectedGenre" name="genre" #genre="ngModel" (change)="setGenre()">
+                <option *ngFor="let genre of _genreArray" [value]="genre.id">{{ genre.name  }}</option>
+            </select>
+        </div>
+        <div [ngClass]="'pagination'">
+            <pagination-controls (pageChange)="pageChange($event)"  directionLinks = "true"autoHide = "true" previousLabel="" nextLabel=""></pagination-controls>
+        </div>
+        <div [ngClass]="'listMovies table-responsive-sm'">
+            <div [ngClass]="'main_grid_items'">
+                <div *ngFor="let movie of _movieArray | paginate: pageConfig;  let i= index;">
+                    <div [ngClass]="'card h-100'" [ngStyle]="{width: '18rem'}">
+                        <app-images [imageSrc]="movie.poster_path" [movieTitle]="movie.title" [noImage]= "movie.noImage"></app-images>
+                        <div [ngClass]="'card-body'">
+                          <h5 [ngClass]="'card-title'">{{ movie.title }}</h5>
+                          <p [ngClass]="'card-text'">{{ movie.overview }}</p>
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
